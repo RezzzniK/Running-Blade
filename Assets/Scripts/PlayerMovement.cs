@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     Vector2 movement;
     Rigidbody rb;
 
-    void Start()
+    void Awake()//CHANGED FROM START TO AWAKE TO AVOID RACE CONDITIONS
     {
         rb=GetComponent<Rigidbody>();//getting rigid body to manipulate it
     }
