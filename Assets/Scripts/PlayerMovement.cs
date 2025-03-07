@@ -6,6 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float controlSpeed=8f;
     [SerializeField] float xClamp=4f;
+    [SerializeField] float zClampForward=4f;
+    [SerializeField] float zClampBackwards=0;
     Vector2 movement;
     Rigidbody rb;
 
@@ -29,6 +31,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 targetPos=currentPos+moveVector*controlSpeed*Time.fixedDeltaTime;
     
         Debug.Log(targetPos);
-        rb.MovePosition(new Vector3(Mathf.Clamp(targetPos.x,-xClamp,xClamp),0,targetPos.z));
+        rb.MovePosition(new Vector3(Mathf.Clamp(targetPos.x,-xClamp,xClamp),0,Mathf.Clamp(targetPos.z,-zClampBackwards,zClampForward)));
     }
 }
