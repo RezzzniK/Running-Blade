@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     }
     //USING EVENTS INSTEAD MESSAGES:
     void PlayerPos(){
-        float xOffset=transform.position.x+movement.x*controlSpeed*Time.deltaTime;
+        float xOffset=rb.position.x+movement.x*controlSpeed*Time.deltaTime;
         rb.MovePosition(new Vector3(Mathf.Clamp(xOffset,-xClamp,xClamp),0,0)); 
     }
 }
