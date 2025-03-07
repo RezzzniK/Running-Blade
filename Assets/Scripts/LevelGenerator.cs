@@ -6,15 +6,14 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] GameObject chunkPrefab;//prefub object
     [SerializeField] int chunksLenght=10;//lenght of  the chunk array
     [SerializeField] Transform chunkObj;//reference to Parent object where all chunks will be stored in heierarcy
-    [SerializeField] float chunkZlenght=10f;
+    [SerializeField] float chunkSizeZAxis=10f;
     [SerializeField] float moveChunkSPeed=8f;
-    // GameObject [] chunksArr;
+    [SerializeField] GameObject player;
     List <GameObject> chunksList;
     void Start()
     {
-       // chunksArr=new GameObject[chunksLenght];//initiateing lenght of chunk array
        chunksList=new List<GameObject>();
-        SpawnChunks();
+       SpawnChunks();
     }
 
     private void SpawnChunks()
@@ -22,34 +21,40 @@ public class LevelGenerator : MonoBehaviour
         Vector3 pos = transform.position;
         for (int i = 0; i < chunksLenght; i++)
         {
-            // chunksArr[i]=Instantiate(chunkPrefab, pos, Quaternion.identity, chunkObj);//getting reference of instantiated element to the array
+        
            chunksList.Add(Instantiate(chunkPrefab, pos, Quaternion.identity, chunkObj));
-            pos.z += chunkZlenght;
+            pos.z += chunkSizeZAxis;
         }
     }
     void Update()
     {
         MoveChunks();
+
     }
     void MoveChunks(){
-        #region old
-        // Vector3 pos = transform.position;
-        // for (int i = 0; i < chunksLenght; i++)
-        // {
-        //     //chunksArr[i].gameObject.transform.Translate(0,0,-moveChunkSPeed*Time.deltaTime);//moving each chunk
-        //     chunksArr[i].gameObject.transform.Translate(transform.forward*(-moveChunkSPeed*Time.deltaTime));
-
-        // }
-        #endregion
-        // foreach (var chunk in chunksArr)
-        // {
-        //     chunk.transform.Translate(transform.forward*(-moveChunkSPeed*Time.deltaTime));
-        // }
-        foreach (var chunk in chunksList)
+        for (int i = 0; i < chunksList.Count; i++)
         {
-             chunk.transform.Translate(transform.forward*(-moveChunkSPeed*Time.deltaTime));
+            if (chunksList[i].gameObject.activeInHierarchy){
+
+
+              chunksList[i].transform.Translate(transform.forward*(-moveChunkSPeed*Time.deltaTime));
+
+            }
+
+            //check if it pass the camera position
+            GameObject chunk= chunksList[i];
+            if (chunk.transform.position.z<Camera.main.transform.position.z-chunkSizeZAxis/*adding a bit more distance to make it disapear less noticble*/){
+                //hide chunk
+                chunk.SetActive(false);
+                //set chunk first in row
+                chunk.transform.Translate(0,0,chunksList.Count*chunkSizeZAxis);
+                //show chunk
+                chunk.SetActive(true);
+            }            
         }
     }
+
+
 
     
 }
