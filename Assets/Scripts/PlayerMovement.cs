@@ -22,8 +22,13 @@ public class PlayerMovement : MonoBehaviour
         movement=context.ReadValue<Vector2>();//same as in send messages plus Readvalue
     }
     //USING EVENTS INSTEAD MESSAGES:
-    void PlayerPos(){
-        float xOffset=rb.position.x+movement.x*controlSpeed*Time.deltaTime;
-        rb.MovePosition(new Vector3(Mathf.Clamp(xOffset,-xClamp,xClamp),0,0)); 
+    void PlayerPos(){   
+
+        Vector3 currentPos=rb.position;
+        Vector3 moveVector=new Vector3(movement.x,0,movement.y);
+        Vector3 targetPos=currentPos+moveVector*controlSpeed*Time.fixedDeltaTime;
+    
+        Debug.Log(targetPos);
+        rb.MovePosition(new Vector3(Mathf.Clamp(targetPos.x,-xClamp,xClamp),0,targetPos.z));
     }
 }
