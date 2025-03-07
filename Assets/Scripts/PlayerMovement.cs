@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,12 +6,12 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [SerializeField] float controlSpeed=8f;
+    [SerializeField] float xClamp=10f;
     Vector2 movement;
 
     // Update is called once per frame
     void Update()
-    {
-        
+    { 
         PlayerPos();
     }
 
@@ -19,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void PlayerPos(){
-        float xOffset=movement.x*controlSpeed*Time.deltaTime;
-         transform.Translate(Vector3.left*(-xOffset));
+        float xOffset=transform.localPosition.x+movement.x*controlSpeed*Time.deltaTime;
+        transform.localPosition=new Vector3(Mathf.Clamp(xOffset,-xClamp,xClamp),0,0);      
     }
 }
