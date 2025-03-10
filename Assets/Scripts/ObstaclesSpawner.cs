@@ -1,12 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ObstaclesSpawner : MonoBehaviour
 {
     [SerializeField] GameObject obstacle;
     [SerializeField] Transform container;
     int obstcleCount=5;
-    float seconds=1;
+     [SerializeField] float spawnTime=1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,10 +17,11 @@ public class ObstaclesSpawner : MonoBehaviour
     
     IEnumerator spawnObstacle(){
         
-        while (obstcleCount>0)
+        while (/*obstcleCount>0*/true)
         {
-           yield return new WaitForSeconds(seconds);
-           Instantiate(obstacle,transform.position,Quaternion.identity,container);
+           yield return new WaitForSeconds(spawnTime);
+           //Instantiate(obstacle,transform.position,Quaternion.identity,container);
+           Instantiate(obstacle,transform.position,Random.rotation/*Quaternion also*/);
            obstcleCount--;
         }
         
