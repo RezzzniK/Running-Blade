@@ -406,8 +406,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f451186473847f898f29278ffa31e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacle: {fileID: 6992470250997779419, guid: 58fa0ba99e9c14abca73013457ef2baf, type: 3}
+  obstacles:
+  - {fileID: 6992470250997779419, guid: 58fa0ba99e9c14abca73013457ef2baf, type: 3}
+  - {fileID: 5628614491576381460, guid: bcc3e913d01ab4106934038e1875d88f, type: 3}
+  - {fileID: 5785049142204345874, guid: db720787fece74a4baaf68b816c2b877, type: 3}
+  - {fileID: 4152672646085315724, guid: dcd6e34b177094874b1308b718eaa615, type: 3}
+  - {fileID: 2110677826390540321, guid: c73ebe25f1e4f41c18a3386abac949c5, type: 3}
+  - {fileID: 1345565405652540122, guid: b1195ddd1f6e54c7db59c0c537d307d0, type: 3}
   container: {fileID: 1800965709}
+  xClamp: 4
   spawnTime: 3
 --- !u!4 &608126052
 Transform:
