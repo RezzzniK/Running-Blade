@@ -190,11 +190,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fencePrefab: {fileID: 3664768969948514758, guid: 56eb71206d39144c0ace6e91632a3744, type: 3}
+  applePrefab: {fileID: 6468924986198539288, guid: 16c3a0b7ae0cb49ebaedf27100372226, type: 3}
+  coinPrefab: {fileID: 580192846544778841, guid: f715089e97a7d4c309f54a34155adc0e, type: 3}
   lanes:
   - -2.5
   - 0
   - 2.5
-  chunkPos: {fileID: 3202885989974128379}
 --- !u!1001 &5592170084164707436
 PrefabInstance:
   m_ObjectHideFlags: 0
