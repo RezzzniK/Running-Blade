@@ -1,16 +1,24 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerCollisionHandler : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] Animator animator;//reference to animator to trigger anim
+    [SerializeField] float collisionCoolDown=1f;
+    bool inProgress=false;
+    void OnCollisionEnter(Collision collision)
     {
-        
+        if(!inProgress){
+           
+            inProgress=true;
+            animator.SetTrigger("HIT");
+            StartCoroutine(hitTimer());
+        }
+      
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    IEnumerator hitTimer(){
+        yield return new WaitForSeconds(collisionCoolDown);
+        inProgress=false;
     }
 }
