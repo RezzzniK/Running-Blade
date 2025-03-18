@@ -8,6 +8,8 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] Transform chunkObj;//reference to Parent object where all chunks will be stored in heierarcy
     [SerializeField] float chunkSizeZAxis=10f;
     [SerializeField] float moveChunkSPeed=8f;
+    [SerializeField] float speedAmount=2f;
+    [SerializeField]float minSpeed=2f;
     [SerializeField] GameObject player;
     List <GameObject> chunksList;
     void Start()
@@ -31,6 +33,14 @@ public class LevelGenerator : MonoBehaviour
         MoveChunks();
 
     }
+    public void ChangeLevelSpeed(float speedToAdd/**will be -1 or 1 depending on which obstcle we picked up*/)
+    {
+        if (moveChunkSPeed-speedAmount>=minSpeed){
+
+            moveChunkSPeed+=speedAmount*speedToAdd;
+            Physics.gravity=new Vector3(Physics.gravity.x,Physics.gravity.y,Physics.gravity.z-/**because we use negativ z axis*/speedAmount*speedToAdd);
+        }
+    }
     void MoveChunks(){
         for (int i = 0; i < chunksList.Count; i++)
         {
@@ -52,9 +62,5 @@ public class LevelGenerator : MonoBehaviour
                 chunk.SetActive(true);
             }            
         }
-    }
-
-
-
-    
+    }    
 }

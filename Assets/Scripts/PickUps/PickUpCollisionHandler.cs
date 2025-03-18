@@ -6,10 +6,7 @@ public abstract class PickUpCollisionHandler : MonoBehaviour
 
     [SerializeField] float rotationSpeed=8f;
 
-    void Start()
-    {
-        
-    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(tagName)){
