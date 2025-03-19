@@ -11,6 +11,7 @@ public class CameraControler : MonoBehaviour
     [SerializeField] float maxOffset=120f;
     [SerializeField] float zoomDuration=1f;//how long we will be lerping from a to b
     // [SerializeField] float drusticModifyer=5f;
+    [SerializeField] ParticleSystem speedEffect;
     void Awake()
     {
         //getting ref to camers
@@ -19,6 +20,11 @@ public class CameraControler : MonoBehaviour
     public void updateCameraFOV(float dist){/**update camera field of view*/
         StopAllCoroutines();
         StartCoroutine(setFOVdist(dist));
+        if(dist>0){
+            speedEffect.Play();
+        }else{
+            speedEffect.Stop();
+        }
     }
 
     //we going to use corutine to make it instantly with certain amount of time
@@ -32,6 +38,7 @@ public class CameraControler : MonoBehaviour
         //we need time 
         float elapsedTime=0;
         while(elapsedTime<zoomDuration){//so this code gives linearly interpolating between 2 points
+           
             float t=elapsedTime/zoomDuration;//incresasing time for lerping, each loop
             elapsedTime+=Time.deltaTime;
             cmr.Lens.FieldOfView=Mathf.Lerp(startFOV,endFOV,t);
