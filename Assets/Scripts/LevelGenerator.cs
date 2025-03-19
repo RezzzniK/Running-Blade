@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
@@ -11,11 +12,14 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] float speedAmount=2f;
     [SerializeField]float minSpeed=2f;
     [SerializeField] GameObject player;
+    CameraControler camControl;
+
     List <GameObject> chunksList;
     void Start()
     {
        chunksList=new List<GameObject>();
        SpawnChunks();
+       camControl=FindFirstObjectByType<CameraControler>();
     }
 
     private void SpawnChunks()
@@ -36,8 +40,9 @@ public class LevelGenerator : MonoBehaviour
     public void ChangeLevelSpeed(float speedToAdd/**will be -1 or 1 depending on which obstcle we picked up*/)
     {
         if (moveChunkSPeed-speedAmount>=minSpeed){
-
+            
             moveChunkSPeed+=speedAmount*speedToAdd;
+            camControl.updateCameraFOV((speedAmount+15)*speedToAdd);
             Physics.gravity=new Vector3(Physics.gravity.x,Physics.gravity.y,Physics.gravity.z-/**because we use negativ z axis*/speedAmount*speedToAdd);
         }
     }
