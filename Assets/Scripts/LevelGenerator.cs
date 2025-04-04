@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] GameObject player;
     [SerializeField] GameObject chunkPrefab;//prefub object
-    [SerializeField] int chunksLenght=10;//lenght of  the chunk array
     [SerializeField] Transform chunkObj;//reference to Parent object where all chunks will be stored in heierarcy
+    [Header("Level Settings")]
+    [SerializeField] int chunksLenght=10;//lenght of  the chunk array
+    [Tooltip("Do not change the size of the chunk, unless chunk prefab size refleects the changee")]
     [SerializeField] float chunkSizeZAxis=10f;
     [SerializeField] float moveChunkSPeed=8f;
     [SerializeField] float speedAmount=2f;
-    [SerializeField]float minSpeed=2f;
-    [SerializeField] GameObject player;
+    [SerializeField]float minSpeed=5f;
+    [SerializeField]float maxSpeed=20f;
+    [SerializeField]float minGravityZpeed=-2f;
+    [SerializeField]float maxGravityZpeed=-22f;
     CameraControler camControl;
 
     List <GameObject> chunksList;
@@ -39,12 +45,15 @@ public class LevelGenerator : MonoBehaviour
     }
     public void ChangeLevelSpeed(float speedToAdd/**will be -1 or 1 depending on which obstcle we picked up*/)
     {
-        if (moveChunkSPeed-speedAmount>=minSpeed){
-            
-            moveChunkSPeed+=speedAmount*speedToAdd;
-            camControl.updateCameraFOV((speedAmount+15)*speedToAdd);
-            Physics.gravity=new Vector3(Physics.gravity.x,Physics.gravity.y,Physics.gravity.z-/**because we use negativ z axis*/speedAmount*speedToAdd);
-        }
+        moveChunkSPeed=Mathf.Clamp(moveChunkSPeed+speedToAdd, minSpeed, maxSpeed);
+        //if (moveChunkSPeed-speedAmount>=minSpeed){
+       // moveChunkSPeed+=speedAmount*speedToAdd;
+        camControl.updateCameraFOV((speedAmount+15)*speedToAdd);
+        Physics.gravity=new Vector3(Physics.gravity.x,
+                                    Physics.gravity.y,
+                                    Mathf.Clamp(Physics.gravity.z+/**because we use negativ z axis*/speedAmount*speedToAdd,minGravityZpeed,maxGravityZpeed)
+                                    );
+       // }
     }
     void MoveChunks(){
         for (int i = 0; i < chunksList.Count; i++)
