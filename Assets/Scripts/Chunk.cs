@@ -11,6 +11,9 @@ public class Chunk : MonoBehaviour
     [SerializeField] int coinsInOneLane=5;
      float spawnChanceApple=.3f;
      float spawnChanceCoin=.5f;
+
+    LevelGenerator levelGenerator;
+    ScoreMG scoreMG;
     
      List <int> availibleLanes=new List<int>{0,1,2};//creating list and populate it with values 0,1,2
     
@@ -21,7 +24,10 @@ public class Chunk : MonoBehaviour
         SpawnApple();
         SpawnCoin();
     }
-
+    public void Init(LevelGenerator levelGenerator,ScoreMG scoreMG){
+        this.levelGenerator = levelGenerator;
+        this.scoreMG = scoreMG;
+    }
    void SpawnCoin()
     {
         if (availibleLanes.Count<=0||Random.value>spawnChanceCoin) return;
@@ -30,7 +36,7 @@ public class Chunk : MonoBehaviour
        // while(coinsQuant>=0){
         for (int i = 0; i < coinsQuant; i++)
         {
-             Instantiate(
+            Coin newCoin= Instantiate(
                     coinPrefab,
                     new Vector3(
                         lanes[laneNum],//getting lane index from the list and set to start_x list
@@ -39,7 +45,8 @@ public class Chunk : MonoBehaviour
                         ),//transform.position is a position of the level chunk
                     Quaternion.identity,
                     this.transform
-                );
+                ).GetComponent<Coin>();
+            newCoin.InitScoreMG(scoreMG);    
         }
             
           //  coinsQuant--;
@@ -83,16 +90,18 @@ public class Chunk : MonoBehaviour
 
     void SpawnApple(){
         if (availibleLanes.Count<=0||Random.value>spawnChanceApple) return;
-        Instantiate(
-                    applePrefab,
-                    new Vector3(
-                        lanes[GetLaneToUse()],//getting lane index from the list and set to start_x list
-                        transform.position.y,
-                        transform.position.z
-                        ),//transform.position is a position of the level chunk
-                    Quaternion.identity,
-                    this.transform
-        );
+        Apple newApple=Instantiate(
+                                    applePrefab,
+                                    new Vector3(
+                                        lanes[GetLaneToUse()],//getting lane index from the list and set to start_x list
+                                        transform.position.y,
+                                        transform.position.z
+                                        ),//transform.position is a position of the level chunk
+                                    Quaternion.identity,
+                                    this.transform
+                                ).GetComponent<Apple>();
+
+        newApple.Init(levelGenerator);
        
     }
   

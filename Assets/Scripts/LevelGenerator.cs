@@ -21,11 +21,14 @@ public class LevelGenerator : MonoBehaviour
     CameraControler camControl;
 
     List <GameObject> chunksList;
+    ScoreMG scoreMG;
     void Start()
     {
        chunksList=new List<GameObject>();
+       scoreMG=FindFirstObjectByType<ScoreMG>();
        SpawnChunks();
        camControl=FindFirstObjectByType<CameraControler>();
+
     }
 
     private void SpawnChunks()
@@ -33,8 +36,11 @@ public class LevelGenerator : MonoBehaviour
         Vector3 pos = transform.position;
         for (int i = 0; i < chunksLenght; i++)
         {
-        
-           chunksList.Add(Instantiate(chunkPrefab, pos, Quaternion.identity, chunkObj));
+            GameObject newCHunk=Instantiate(chunkPrefab, pos, Quaternion.identity, chunkObj);
+            chunksList.Add(newCHunk);
+            Chunk chunk=newCHunk.GetComponent<Chunk>();//getting reference to new chunk
+            chunk.Init(this,scoreMG);//initiating levelgenerator in the chunk
+
             pos.z += chunkSizeZAxis;
         }
     }
