@@ -6355,6 +6355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer_txt: {fileID: 1344626543}
   initial_timer: 20
+  max_timer_upd: 5
   game_over_txt: {fileID: 505937130}
   movement: {fileID: 1103696770}
 --- !u!1 &1550072230

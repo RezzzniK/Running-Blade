@@ -4,6 +4,7 @@ public class GameStateMG : MonoBehaviour
 {
     [SerializeField] TMP_Text timer_txt;    
     [SerializeField] float initial_timer=60f;
+    [SerializeField] float max_timer_upd=5f;
     [SerializeField] GameObject game_over_txt; 
     [SerializeField] PlayerMovement movement;
 
@@ -23,6 +24,9 @@ public class GameStateMG : MonoBehaviour
              timer_txt.text="Timer:00.0";
              GameOver();
         }  
+    }
+    public void UpdateTImer(){
+        initial_timer+=max_timer_upd;
     }
     void GameOver(){
         game_over_txt.SetActive(true);
