@@ -6,7 +6,8 @@ public class LevelGenerator : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] GameObject player;
-    [SerializeField] GameObject chunkPrefab;//prefub object
+    [SerializeField] GameObject[] chunkPrefab;//prefub object
+    [SerializeField] GameObject checkPointPrefab;
     [SerializeField] Transform chunkObj;//reference to Parent object where all chunks will be stored in heierarcy
     [Header("Level Settings")]
     [SerializeField] int chunksLenght=10;//lenght of  the chunk array
@@ -18,6 +19,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField]float maxSpeed=20f;
     [SerializeField]float minGravityZpeed=-2f;
     [SerializeField]float maxGravityZpeed=-22f;
+    [SerializeField] int checkPointInterval=10;
     CameraControler camControl;
 
     List <GameObject> chunksList;
@@ -36,12 +38,20 @@ public class LevelGenerator : MonoBehaviour
         Vector3 pos = transform.position;
         for (int i = 0; i < chunksLenght; i++)
         {
-            GameObject newCHunk=Instantiate(chunkPrefab, pos, Quaternion.identity, chunkObj);
+           GameObject newCHunk;
+           Debug.Log(chunksList.Count);
+           if ((chunksList.Count+1 )%checkPointInterval==0 ){
+            Debug.Log("CHECK");
+            newCHunk=Instantiate(checkPointPrefab, pos, Quaternion.identity, chunkObj);
+           }
+           else{
+            newCHunk=Instantiate(chunkPrefab[ Random.Range(0,chunkPrefab.Length)], pos, Quaternion.identity, chunkObj);
+           }
             chunksList.Add(newCHunk);
             Chunk chunk=newCHunk.GetComponent<Chunk>();//getting reference to new chunk
             chunk.Init(this,scoreMG);//initiating levelgenerator in the chunk
-
             pos.z += chunkSizeZAxis;
+            
         }
     }
     void Update()

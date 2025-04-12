@@ -1173,7 +1173,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1103696767}
-  chunkPrefab: {fileID: 7385763179368569248, guid: 5caa97c7c0eca48e2b20415fbbac4712, type: 3}
+  chunkPrefab:
+  - {fileID: 7385763179368569248, guid: 5caa97c7c0eca48e2b20415fbbac4712, type: 3}
+  - {fileID: 636938412839945566, guid: 6a101c7ec4074a649ab36d8fcd780bdc, type: 3}
+  - {fileID: 7385763179368569248, guid: 5caa97c7c0eca48e2b20415fbbac4712, type: 3}
+  - {fileID: 6358858195985661910, guid: fecf783fac052af4b97af6d39210bf2b, type: 3}
+  - {fileID: 4027788619828611733, guid: f9744f1ae7fc1974c86418480e0384bd, type: 3}
+  checkPointPrefab: {fileID: 1919743165272529222, guid: 8cb6af6ae7094234db2437b12d890442, type: 3}
   chunkObj: {fileID: 1550072231}
   chunksLenght: 10
   chunkSizeZAxis: 10
@@ -1183,6 +1189,7 @@ MonoBehaviour:
   maxSpeed: 20
   minGravityZpeed: -9.8
   maxGravityZpeed: -20
+  checkPointInterval: 10
 --- !u!4 &1105750103
 Transform:
   m_ObjectHideFlags: 0
@@ -6347,7 +6354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer_txt: {fileID: 1344626543}
-  initial_timer: 5
+  initial_timer: 20
   game_over_txt: {fileID: 505937130}
   movement: {fileID: 1103696770}
 --- !u!1 &1550072230
