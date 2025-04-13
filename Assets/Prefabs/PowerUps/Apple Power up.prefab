@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4331148206273931062}
   m_Layer: 0
   m_Name: Apple Power up
-  m_TagString: Untagged
+  m_TagString: Apple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,6 +111,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 670757360106655997}
     m_Modifications:
+    - target: {fileID: 783831759835352983, guid: 37cc5698a53a6bf478be4c88a8e64e9c, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 783831759835352983, guid: 37cc5698a53a6bf478be4c88a8e64e9c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 9f4e6c06a8fa3bf43bd15b12d99d65d9, type: 2}
+    - target: {fileID: 783831759835352983, guid: 37cc5698a53a6bf478be4c88a8e64e9c, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: efa5233ef110c9743a2a82ca6e2d52d1, type: 2}
     - target: {fileID: 5778731573898941053, guid: 37cc5698a53a6bf478be4c88a8e64e9c, type: 3}
       propertyPath: m_Name
       value: SM_Applesm
