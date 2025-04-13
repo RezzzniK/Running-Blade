@@ -18,7 +18,6 @@ public class Coin : PickUpCollisionHandler
     // }
     protected override void PickUp()
     {
-       Debug.Log("Add 100 coins");
        score_manager_txt.UpdateText(100);
     }
 }

@@ -29,8 +29,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 currentPos=rb.position;
         Vector3 moveVector=new Vector3(movement.x,0,movement.y);
         Vector3 targetPos=currentPos+moveVector*controlSpeed*Time.fixedDeltaTime;
-    
-       // Debug.Log(targetPos);
         rb.MovePosition(new Vector3(Mathf.Clamp(targetPos.x,-xClamp,xClamp),0,Mathf.Clamp(targetPos.z,-zClampBackwards,zClampForward)));
     }
 }

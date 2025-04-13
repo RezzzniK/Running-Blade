@@ -39,9 +39,8 @@ public class LevelGenerator : MonoBehaviour
         for (int i = 0; i < chunksLenght; i++)
         {
            GameObject newCHunk;
-           Debug.Log(chunksList.Count);
            if ((chunksList.Count+1 )%checkPointInterval==0 ){
-            Debug.Log("CHECK");
+            
             newCHunk=Instantiate(checkPointPrefab, pos, Quaternion.identity, chunkObj);
            }
            else{

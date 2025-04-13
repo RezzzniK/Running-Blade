@@ -32,7 +32,6 @@ public class CameraControler : MonoBehaviour
         //we going to use lerp(travaling from a to b by certain amount of time)
         //we need start position
         float startFOV=cmr.Lens.FieldOfView;
-        Debug.Log(startFOV);
         //we need end position
         float endFOV=Mathf.Clamp(startFOV+dist,minOffset,maxOffset);
         //we need time 
